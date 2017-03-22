@@ -33,9 +33,9 @@ shinyUI(fluidPage(
       # Date of flight selection
       dateInput("depDate","Date of Departure:"),
       # Airlines
-      selectInput('Airline', 'Select Airline:', airlines_map$Description, selected = NULL, multiple = FALSE),
+      selectInput('Airline', 'Select Airline:', sort(airlines_map$Description), selected = NULL, multiple = FALSE),
       # Airport
-      selectInput('Airport', 'Select Airlport:', airport_map$Description, selected = NULL, multiple = FALSE),
+      selectInput('Airport', 'Select Airlport:', sort(airport_map$Description), selected = NULL, multiple = FALSE),
       sliderInput("DayOfWeek","Day of Week:",min = 1,max = 7,value = 1),
       sliderInput("ArrTime","arrival time", dragRange=FALSE, value=0, min=0,max=24,step=0.5)
         
