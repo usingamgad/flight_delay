@@ -7,6 +7,10 @@
 #    http://shiny.rstudio.com/
 #
 
+##loading airline/airport maps
+airport_map<-read.csv('L_AIRPORT_ID.csv')
+airlines_map<-read.csv('L_UNIQUE_CARRIERS.csv')
+
 library(shiny)
 # create choices for choice selection
 choice <- c("one", "two", "three")
@@ -27,15 +31,14 @@ shinyUI(fluidPage(
       #Scheduled departure time/schedules arrival time - conditional input
       
       # Date of flight selection
-      dateInput("depDate","Date of Departure:")
-      ,
-       sliderInput("DayOfWeek",
-                   "Day of Week:",
-                   min = 1,
-                   max = 7,
-                   value = 1)
-       ,
-       sliderInput("ArrTime","arrival time", dragRange=FALSE, value=0, min=0,max=24,step=0.5)
+      dateInput("depDate","Date of Departure:"),
+      # Airlines
+      selectInput('Airline', 'Select Airline:', airlines_map$Description, selected = NULL, multiple = FALSE),
+      # Airport
+      selectInput('Airport', 'Select Airlport:', airport_map$Description, selected = NULL, multiple = FALSE),
+      sliderInput("DayOfWeek","Day of Week:",min = 1,max = 7,value = 1),
+      sliderInput("ArrTime","arrival time", dragRange=FALSE, value=0, min=0,max=24,step=0.5)
+        
     ),
     
     # Show a plot of the generated distribution

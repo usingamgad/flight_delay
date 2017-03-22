@@ -15,7 +15,11 @@ shinyServer(function(input, output) {
    
   output$Delay <- renderText({
     
-    delay<-predict(lm,data.frame(DayOfWeek=input$DayOfWeek,ArrTime=input$ArrTime))
+    #map_airlines
+    airline<-airlines_map[airlines_map$Description==input$Airline,]$Code
+    airport<-airlport_map[airlport_map$Description==input$Airport,]$Code
+    
+    delay<-predict(lm,data.frame(DayOfWeek=input$DayOfWeek,ArrTime=input$ArrTime,Airport=airport,Airline=airline))
     print(delay)
     
   })
