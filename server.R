@@ -32,7 +32,7 @@ shinyServer(function(input, output) {
     else if (1==1)
     {return(list(src='yellow.jpg',contentType='image/jpg',alt='Face'))}
     else
-    {return(list(src='green.jpg',contentType='image/jpg',alt='Face'))}
+    {return(NULL)}
   },deleteFile=FALSE)
   
 })
