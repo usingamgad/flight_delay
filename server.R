@@ -25,14 +25,24 @@ shinyServer(function(input, output) {
   })
   
   output$my_image<- renderImage({
-    if (1==3)
+    if (1==1)
     {return(list(src='green.jpg',contentType='image/jpg',alt='Face'))}
     else if (1==2)
     {return(list(src='red.jpg',contentType='image/jpg',alt='Face'))}
-    else if (1==1)
+    else if (1==3)
     {return(list(src='yellow.jpg',contentType='image/jpg',alt='Face'))}
     else
-    {return(list(src='green.jpg',contentType='image/jpg',alt='Face'))}
+    {return(NULL)}
   },deleteFile=FALSE)
   
+})
+
+# Push user input to Python script
+pythonCallResults <- eventReactive(input$button, {
+  ##command<-paste0("python ",files[[selected()]], " www/",input$audiofilelist," ",  apis[[selected()]][[input$languagechoice]])
+  command<-paste0('test:',input$airline)
+  print(command)
+  ##result<-system(command,intern = TRUE)
+  ##print(result)
+  paste0("Delay in minutes: ", command)
 })

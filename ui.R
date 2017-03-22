@@ -60,7 +60,10 @@ shinyUI(fluidPage(
       ,
       # Airport
       selectInput('Airport', 'Select Airlport:', airport_map$Description, selected = NULL, multiple = FALSE)
-    ),
+      ,
+      # Button to pass inputs to Python script
+      actionButton("button", "Calculate Delay")
+      ),
     
     # Show a plot of the generated distribution
     mainPanel(
