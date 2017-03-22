@@ -22,34 +22,49 @@ shinyUI(fluidPage(
   titlePanel("Flight Delays in the US in January 2016"),
   
   # Sidebar with a slider input for number of bins 
+  # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
-      #Date selection
-      #Airline ID (need to find a mapping to lookup on FAA homepage) numeric, 5 digits
-      #OriginAriportID (use lookup)
-      #Destination Airport ID (lookup)
-      #Scheduled departure time/schedules arrival time - conditional input
       
       # Date of flight selection
-      dateInput("depDate","Date of Departure:"),
+      dateInput("depDate","Date of Departure:")
+      ,
+      # time of departure or arrival input
+      radioButtons(
+        "deparr", "Please select:",
+        c("Departure Time",
+          "Arrival Time"), inline = TRUE)
+      ,
+      conditionalPanel(
+        condition = "input.deparr == 'Departure Time'",
+        h5("Time of Departure:"),
+        bootstrapPage(
+          div(style="display:inline-block",selectInput("depTimeH", "Hours:", c(0:23), selected = 1, multiple = FALSE,
+                                                       selectize = TRUE, width = 80)),
+          div(style="display:inline-block",selectInput("depTimeM", "Minutes:", c(0:59), selected = 00, multiple = FALSE,
+                                                       selectize = TRUE, width = 80))
+        ))
+      ,
+      conditionalPanel(
+        condition = "input.deparr == 'Arrival Time'",
+        h5("Time of Arrival:"),
+        bootstrapPage(
+          div(style="display:inline-block",selectInput("arrTimeH", "Hours:", c(0:23), selected = 1, multiple = FALSE,
+                                                       selectize = TRUE, width = 80)),
+          div(style="display:inline-block",selectInput("arrTimeM", "Minutes:", c(0:59), selected = 00, multiple = FALSE,
+                                                       selectize = TRUE, width = 80))
+        ))
+      ,
       # Airlines
-      selectInput('Airline', 'Select Airline:', sort(airlines_map$Description), selected = NULL, multiple = FALSE),
+      selectInput('Airline', 'Select Airline:', airlines_map$Description, selected = NULL, multiple = FALSE)
+      ,
       # Airport
-      selectInput('Airport', 'Select Airlport:', sort(airport_map$Description), selected = NULL, multiple = FALSE),
-      sliderInput("DayOfWeek","Day of Week:",min = 1,max = 7,value = 1),
-      sliderInput("ArrTime","arrival time", dragRange=FALSE, value=0, min=0,max=24,step=0.5)
-        
+      selectInput('Airport', 'Select Airlport:', airport_map$Description, selected = NULL, multiple = FALSE)
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-      # plotOutput("distPlot")
-       ##textOutput("Delay"),
-      #img(src="/Users/mm186160/Documents/Bootcamp/Team_Umizumi/green.png", alt="dinosaur")
-      #img(src='green.png', align = "right")
-      
       imageOutput("my_image")
- 
     )
   )
 ))

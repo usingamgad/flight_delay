@@ -26,13 +26,13 @@ shinyServer(function(input, output) {
   
   output$my_image<- renderImage({
     if (1==3)
-    {return(list(src='green.png',contentType='image/png',alt='Face'))}
+    {return(list(src='green.jpg',contentType='image/jpg',alt='Face'))}
     else if (1==2)
-    {return(list(src='red.png',contentType='image/png',alt='Face'))}
+    {return(list(src='red.jpg',contentType='image/jpg',alt='Face'))}
     else if (1==1)
-    {return(list(src='yellow.jpeg',contentType='image/jpg',alt='Face'))}
+    {return(list(src='yellow.jpg',contentType='image/jpg',alt='Face'))}
     else
-    {return(list(src='red.png',contentType='image/png',alt='Face'))}
+    {return(list(src='green.jpg',contentType='image/jpg',alt='Face'))}
   },deleteFile=FALSE)
   
 })
