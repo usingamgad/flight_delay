@@ -20,6 +20,15 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
+      #Date selection
+      #Airline ID (need to find a mapping to lookup on FAA homepage) numeric, 5 digits
+      #OriginAriportID (use lookup)
+      #Destination Airport ID (lookup)
+      #Scheduled departure time/schedules arrival time - conditional input
+      
+      # Date of flight selection
+      dateInput("depDate","Date of Departure:")
+      ,
        sliderInput("DayOfWeek",
                    "Day of Week:",
                    min = 1,
