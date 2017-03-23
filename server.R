@@ -42,7 +42,7 @@ shinyServer(function(input, output) {
     else if (1==3)
     {return(list(src='red5.png',contentType='image/png',alt='You flight will be significantly delayed - more than 90 minutes.'))}
     else
-    {return(list(src='green1.png',contentType='image/png',alt='Face'))}
+    {return(NULL)}
   },deleteFile=FALSE)
 
 # Push user input to Python script
