@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import speech_recognition as sr
+#import speech_recognition as sr
 import sys
 #import reload
 # obtain path to "english.wav" in the same folder as this script
@@ -22,8 +22,8 @@ import os
 import sys
 import pandas as pd
 
-filename_predictor = "final_model.sav"
-#loaded_model_clf = pickle.load(open(path.join(path.dirname(path.realpath(__file__)), filename_predictor), 'rb'))
+filename_predictor = "final_model.pkl"
+#loaded_model_clf = joblib.load(open(path.join(path.dirname(path.realpath(__file__)), filename_predictor)))
 loaded_model_clf = joblib.load('/Users/mo186022/Github/Bootcamp/flight_delay/final_model.pkl')
 test_df = pd.DataFrame({'DayOfWeek': [day_of_week],
                                 'DayofMonth': [day_of_month],
@@ -34,7 +34,18 @@ test_df = pd.DataFrame({'DayOfWeek': [day_of_week],
                                 'CRSDepHH':[departure_time]})
 forecast = loaded_model_clf.predict(test_df)
 
-print(forecast)
+
+if forecast == ['Delay']:
+    print("The flight is likely to be delayed (up tp 1 hour)")
+elif forecast == ['No Delay']:
+    print("The flight is likely to depart on time")
+elif forecast == ['Severe Delay']:
+    print("The flight is likely to be severely delayed (more than 2 hours)")
+elif forecast == ['Significant Delay']:
+    print("The flight is likely to be significantly delayed (up to 2 hours")
+elif forecast == ['Minor Delay']:
+    print("The flight is likely to be slightly delayed (up to 30 minutes)")
+
 
 
 
