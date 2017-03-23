@@ -67,15 +67,9 @@ shinyUI(fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
-<<<<<<< HEAD
-      
-      imageOutput("my_image"),
-      textOutput("est")
-=======
-      imageOutput("my_image")
       #,
       #textOutput("Delay")
->>>>>>> master
+      imageOutput("my_image")
     )
   )
 ))
