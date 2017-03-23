@@ -46,7 +46,7 @@ shinyServer(function(input, output) {
   },deleteFile=FALSE)
   
 
-    print(command)
+    #print(command)
   # Push user input to Python script
   pythonCallResults <- eventReactive(input$button, {
     ##command<-paste("python FlightApp_main.py ",input$DayOfWeek,input$ArrTime,airport,airline )

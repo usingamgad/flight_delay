@@ -19,7 +19,7 @@ choice <- c("one", "two", "three")
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Flight Delays in the US in January 2016"),
+  titlePanel("Flight Delays in the US"),
   
   # Sidebar with a slider input for number of bins 
   # Sidebar with a slider input for number of bins 
