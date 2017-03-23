@@ -44,15 +44,19 @@ shinyServer(function(input, output) {
     else
     {return(NULL)}
   },deleteFile=FALSE)
+  
 
-# Push user input to Python script
-pythonCallResults <- eventReactive(input$button, {
-  ##command<-paste0("python ",files[[selected()]], " www/",input$audiofilelist," ",  apis[[selected()]][[input$languagechoice]])
-  command<-paste0('test:',input$airline)
-  print(command)
-  ##result<-system(command,intern = TRUE)
-  ##print(result)
-  paste0("Delay in minutes: ", command)
-})
-
-})
+    print(command)
+  # Push user input to Python script
+  pythonCallResults <- eventReactive(input$button, {
+    ##command<-paste("python FlightApp_main.py ",input$DayOfWeek,input$ArrTime,airport,airline )
+    command<-paste("python FlightApp_main.py 1 1 1 19805 11298 11433 11")
+    result<-system(command,intern = TRUE)
+    print(result)
+    paste0("Delay in minutes: ", result)
+  })
+  
+  output$est <- renderText({
+    pythonCallResults()
+  })
+  })
