@@ -9,7 +9,7 @@
 
 ##loading airline/airport maps
 airport_map<-read.csv('L_AIRPORT_ID.csv')
-airlines_map<-read.csv('L_UNIQUE_CARRIERS.csv')
+airlines_map<-read.csv('L_AIRLINE_ID.csv')
 
 library(shiny)
 # create choices for choice selection
@@ -19,7 +19,7 @@ choice <- c("one", "two", "three")
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Flight Delays in the US in January 2016"),
+  titlePanel("Flight Delays in the US"),
   
   # Sidebar with a slider input for number of bins 
   # Sidebar with a slider input for number of bins 
@@ -67,9 +67,9 @@ shinyUI(fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
-      
-      imageOutput("my_image"),
-      textOutput("est")
+      #,
+      #textOutput("Delay")
+      imageOutput("my_image")
     )
   )
 ))
