@@ -9,7 +9,7 @@
 
 ##loading airline/airport maps
 airport_map<-read.csv('L_AIRPORT_ID.csv')
-airlines_map<-read.csv('L_UNIQUE_CARRIERS.csv')
+airlines_map<-read.csv('L_AIRLINE_ID.csv')
 
 library(shiny)
 # create choices for choice selection
@@ -67,9 +67,15 @@ shinyUI(fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
+<<<<<<< HEAD
       
       imageOutput("my_image"),
       textOutput("est")
+=======
+      imageOutput("my_image")
+      #,
+      #textOutput("Delay")
+>>>>>>> master
     )
   )
 ))
