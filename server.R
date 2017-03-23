@@ -10,6 +10,9 @@
 library(shiny)
 library(png)
 
+airport_map<-read.csv('L_AIRPORT_ID.csv')
+airlines_map<-read.csv('L_AIRLINE_ID.csv')
+
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
    
@@ -17,25 +20,30 @@ shinyServer(function(input, output) {
     
     #map_airlines
     airline<-airlines_map[airlines_map$Description==input$Airline,]$Code
-    airport<-airlport_map[airlport_map$Description==input$Airport,]$Code
+    airport<-airport_map[airport_map$Description==input$Airport,]$Code
     
-    delay<-predict(lm,data.frame(DayOfWeek=input$DayOfWeek,ArrTime=input$ArrTime,Airport=airport,Airline=airline))
-    print(delay)
-    
+    #map date input to day of week, day of month and month
+    dayofweek <- as.POSIXlt(input$depDate)$wday
+    if(dayofweek==0) {dayofweek <- 7}
+    dayofmonth <- day(input$depDate)
+    month <- month(input$depDate)
+    #print(dayofweek)
   })
-  
+
   output$my_image<- renderImage({
     if (1==1)
-    {return(list(src='green.jpg',contentType='image/jpg',alt='Face'))}
+    {return(list(src='green1.png',contentType='image/png',alt='All is well. Your flight will not be delayed.'))}
     else if (1==2)
-    {return(list(src='red.jpg',contentType='image/jpg',alt='Face'))}
+    {return(list(src='green2.png',contentType='image/png',alt='Your flight will be delayed, but no more than 30 minutes.'))}
     else if (1==3)
-    {return(list(src='yellow.jpg',contentType='image/jpg',alt='Face'))}
+    {return(list(src='yellow3.png',contentType='image/png',alt='Your flight will be more than 30 minutes delayed, but no more than 60 minutes.'))}
+    else if (1==3)
+    {return(list(src='orange4.png',contentType='image/png',alt='Your flight will be significantly delayed - more than one hour, but no more than 90 minutes'))}
+    else if (1==3)
+    {return(list(src='red5.png',contentType='image/png',alt='You flight will be significantly delayed - more than 90 minutes.'))}
     else
-    {return(list(src='green.jpg',contentType='image/jpg',alt='Face'))}
+    {return(list(src='green1.png',contentType='image/png',alt='Face'))}
   },deleteFile=FALSE)
-  
-})
 
 # Push user input to Python script
 pythonCallResults <- eventReactive(input$button, {
@@ -45,4 +53,6 @@ pythonCallResults <- eventReactive(input$button, {
   ##result<-system(command,intern = TRUE)
   ##print(result)
   paste0("Delay in minutes: ", command)
+})
+
 })
