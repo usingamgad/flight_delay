@@ -20,14 +20,15 @@ shinyServer(function(input, output) {
     
     #map_airlines
     airline<-airlines_map[airlines_map$Description==input$Airline,]$Code
-    airport<-airport_map[airport_map$Description==input$Airport,]$Code
+    depairport<-airport_map[airport_map$Description==input$DepAirport,]$Code
+    arrairport<-airport_map[airport_map$Description==input$ArrAirport,]$Code
     
     #map date input to day of week, day of month and month
     dayofweek <- as.POSIXlt(input$depDate)$wday
     if(dayofweek==0) {dayofweek <- 7}
     dayofmonth <- day(input$depDate)
     month <- month(input$depDate)
-    #print(dayofweek)
+    #print(arrairport)
   })
 
   output$my_image<- renderImage({
@@ -45,8 +46,6 @@ shinyServer(function(input, output) {
     {return(NULL)}
   },deleteFile=FALSE)
   
-
-    #print(command)
   # Push user input to Python script
   pythonCallResults <- eventReactive(input$button, {
     ##command<-paste("python FlightApp_main.py ",input$DayOfWeek,input$ArrTime,airport,airline )
