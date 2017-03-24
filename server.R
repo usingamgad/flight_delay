@@ -33,7 +33,7 @@ shinyServer(function(input, output) {
     month <- month(input$depDate)
     #print(arrairport)
     
-    command<-paste("python FlightApp_main.py ",airline,depairport,arrairport,dayofweek,dayofmonth,dayofmonth,month) 
+    command<-paste("python FlightApp_main.py ",dayofweek,dayofmonth,month,airline,depairport,arrairport,input$depTimeH) 
     ##command<-paste("python FlightApp_main.py 1 1 1 19805 11298 11433 11")
     result<-system(command,intern = TRUE)
     
@@ -41,13 +41,19 @@ shinyServer(function(input, output) {
       })
   
     output$my_image<-renderImage({
-    if(pythonCallResults()=="['No Delay']")
-    {list(src='yellow3.png')}
-    else 
-    {list(src='orange4.png')}
+    if(pythonCallResults()=='1')
+    {list(src='images/green1.png')}
+    else if(pythonCallResults()=='5')
+    {list(src='images/green2.png')}
+    else if(pythonCallResults()=='0')
+    {list(src='images/yellow3.png')}
+    else if(pythonCallResults()=='4')
+    {list(src='images/orange4.png')}
+    else if(pythonCallResults()=='3')
+    {list(src='images/red5.png')}
     },deleteFile = FALSE)
   
-  output$est <- renderText({pythonCallResults()})
+  ##output$est <- renderText({pythonCallResults()})
   
  
    
