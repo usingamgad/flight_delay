@@ -13,17 +13,11 @@ destination = str(sys.argv[6])
 departure_time = str(sys.argv[7])
 
 from sklearn.externals import joblib
-import nltk
 import os
-import sys
 import pandas as pd
 
-filename_predictor = "final_model.pkl"
-#loaded_model_clf = joblib.load(open(path.join(path.dirname(path.realpath(__file__)), "final_model.pkl")))
-#loaded_model_clf = joblib.load('/Users/mo186022/Github/Bootcamp/flight_delay/final_model.pkl')
 
-
-with open(path.join(path.dirname(path.realpath(__file__)), "final_model.pkl"), 'rb') as fo:
+with open("final_model.pkl", "rb") as fo:
     loaded_model_clf = joblib.load(fo)
 
 

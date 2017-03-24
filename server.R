@@ -33,7 +33,7 @@ shinyServer(function(input, output) {
     month <- month(input$depDate)
     #print(arrairport)
     
-    command<-paste("python FlightApp_main.py ",dayofweek,dayofmonth,month,airline,depairport,arrairport,input$depTimeH) 
+    command<-paste("python3 FlightApp_main.py ",dayofweek,dayofmonth,month,airline,depairport,arrairport,input$depTimeH) 
     ##command<-paste("python FlightApp_main.py 1 1 1 19805 11298 11433 11")
     result<-system(command,intern = TRUE)
     
